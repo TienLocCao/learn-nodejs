@@ -1,15 +1,16 @@
 var express = require('express');
-const controller  = require('./../controllers/user.controller');
+const userController  = require('./../controllers/user.controller');
+const userValidate = require('./../validate/user.validate');
 const route= express.Router();
 
-route.get('/', controller.index);
+route.get('/', userController.index);
 
-route.get('/create', controller.create); 
-route.post('/create', controller.postCreate);
+route.get('/create', userController.create); 
+route.post('/create', userValidate.postCreate, userController.postCreate);
 
-route.get('/search', controller.search);
+route.get('/search', userController.search);
 
-route.get('/:id', controller.get); 
+route.get('/:id', userController.get); 
 
 
 module.exports = route;
