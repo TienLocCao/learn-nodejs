@@ -1,18 +1,28 @@
 extends ./../../layouts/common
 
 block content
-  h1 List Users
-  a(href="users/create") Create User
-  form(action="/users/search",method="GET")
-    input(type="text",name="q")
-    button Search
+  div.d-flex.align-items-center
+    h1 List Users
+    a.ml-3.btn.btn-primary.px-4(href="users/create") Add User
+  form(action="/users/search",method="GET",class="d-flex col-12")
+    input.form-text.col-3(type="text",name="q")
+    button(type="submit", class="btn btn-primary mx-3 px-4") Search
 
+  table(class="table table-striped mx-3")
+    thead
+      tr
+        th Name
+        th Phone
+        th Action
+    tbody
+    if users.length>0
+      each user in users
+        tr
+          td= user.name
+          td= user.phone
+          td 
+            a(href=`/users/${user.id}`) View
 
-  if users.length>0
-    each user in users
-      li= user.name
-      span &nbsp;
-      a(href=`/users/${user.id}`) View
-
-  else
-    p No data 
+    else
+      tr
+        td(colspan="3") No data 
