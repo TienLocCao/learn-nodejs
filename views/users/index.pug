@@ -1,0 +1,18 @@
+extends ./../../layouts/common
+
+block content
+  h1 List Users
+  a(href="users/create") Create User
+  form(action="/users/search",method="GET")
+    input(type="text",name="q")
+    button Search
+
+
+  if users.length>0
+    each user in users
+      li= user.name
+      span &nbsp;
+      a(href=`/users/${user.id}`) View
+
+  else
+    p No data 
