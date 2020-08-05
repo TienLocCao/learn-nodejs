@@ -8,7 +8,7 @@ module.exports.index = function(req, res) {
 }
 
 module.exports.create = function(req, res) {
-    res.render('users/create');
+    res.redirect('users/create');
 }
 
 module.exports.postCreate = function(req,res) {

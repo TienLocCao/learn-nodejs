@@ -2,6 +2,9 @@ var express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
 const userRoute =  require('./routers/users.route');
+const authRoute =  require('./routers/auth.route');
+const cookieParser = require('cookie-parser');
+const authMiddleware =  require('./middlewares/auth.middleware');
 
 var app = express();
 var port =3000;
@@ -11,8 +14,8 @@ app.use(
         extended: true
     })
 )
-    
 app.use(bodyParser.json())
+app.use(cookieParser());
 
 app.use(express.static('public'));
 
@@ -24,7 +27,7 @@ app.set('views', './views');
 //     {id:2,name:'B'}
 // ]
 
-app.get('/', function(req, res) {
+app.get('/', authMiddleware.requiredAuth, function(req, res) {
     // res.send('<h1>Hello world!</h1>');
     // res.render('index');
     res.render('index',{
@@ -36,4 +39,6 @@ app.listen(port ,function(){
     console.log(`server listening on port ${port}`)
 })
 
-app.use('/users',userRoute);
+app.use('/users', authMiddleware.requiredAuth, userRoute);
+
+app.use('/auth', authRoute);

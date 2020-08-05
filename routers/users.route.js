@@ -1,16 +1,16 @@
 var express = require('express');
-const userController  = require('./../controllers/user.controller');
-const userValidate = require('./../validate/user.validate');
+const controller  = require('./../controllers/user.controller');
+const validate = require('./../validate/user.validate');
 const route= express.Router();
 
-route.get('/', userController.index);
+route.get('/', controller.index);
 
-route.get('/create', userController.create); 
-route.post('/create', userValidate.postCreate, userController.postCreate);
+route.get('/create', controller.create); 
+route.post('/create', validate.postCreate, controller.postCreate);
 
-route.get('/search', userController.search);
+route.get('/search', controller.search);
 
-route.get('/:id', userController.get); 
+route.get('/:id', controller.get); 
 
 
 module.exports = route;
