@@ -15,6 +15,8 @@ html
                         a(class="nav-link", href="/") Home 
                     li(class="nav-item")
                         a(class="nav-link", href="/users") Users
+            if user
+                p=user.name
         div.px-3
             block content
         script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")

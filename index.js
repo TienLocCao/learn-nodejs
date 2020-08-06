@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
@@ -15,7 +16,7 @@ app.use(
     })
 )
 app.use(bodyParser.json())
-app.use(cookieParser());
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.static('public'));
 
