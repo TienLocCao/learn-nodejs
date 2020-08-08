@@ -1,0 +1,16 @@
+extends ./../../layouts/common
+
+block content
+  h1 New Transfer
+
+  form(action="/transfer/create",method="POST",class="col-12")
+    input(type='hidden',name="_csrf", value=csrfToken )
+    div.form-group
+      label(for='accountId') Account id
+      input#accountId.form-control(type='text',name="accountId", placeholder='Account id')
+    div.form-group
+      label(for='amount') amount
+      input#amount.form-control(type='number',name="amount", placeholder='500000')
+    
+    button(type="submit", class="btn btn-primary px-4") Add
+

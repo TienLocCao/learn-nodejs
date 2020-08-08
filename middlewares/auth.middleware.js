@@ -11,5 +11,9 @@ module.exports.requiredAuth = function(req, res, next) {
         return;
     }
     res.locals.user=user;
+    var sessionID= req.signedCookies.sessionID;
+    var total = db.get('sessions').find({id:sessionID}).get('cart')
+    .reduce((total, course) => total + parseInt(course), 0).value();
+    res.locals.totalCard= total;
     next();
 }
