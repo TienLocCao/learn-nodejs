@@ -8,14 +8,7 @@ module.exports.index = function(req, res) {
 }
 
 module.exports.create = function(req, res) {
-    res.redirect('users/create');
-}
-
-module.exports.postCreate = function(req,res) {
-    // users.push(req.body);
-    req.body.id = shortid.generate();
-    db.get('users').push(req.body).write();
-    res.redirect('/users');
+    res.render('users/create');
 }
 
 module.exports.search = function(req,res) {
@@ -31,3 +24,10 @@ module.exports.get = function(req, res) {
     res.render('users/view', {user:user});
 }
 
+module.exports.postCreate = function(req,res) {
+    // users.push(req.body);
+    req.body.id = shortid.generate();
+    req.body.avatar = req.file.destination.split('/').slice(1).join('/').concat(`/${req.file.filename}`);
+    db.get('users').push(req.body).write();
+    res.redirect('/users');
+}

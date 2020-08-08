@@ -11,6 +11,7 @@ block content
   table(class="table table-striped mx-3")
     thead
       tr
+        th Avatar
         th Name
         th Phone
         th Action
@@ -18,6 +19,8 @@ block content
     if users.length>0
       each user in users
         tr
+          td
+            img(width="40",height="40",src=user.avatar) 
           td= user.name
           td= user.phone
           td 
