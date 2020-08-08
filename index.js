@@ -3,6 +3,7 @@ var express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./db');
 const userRoute =  require('./routers/users.route');
+const productRoute =  require('./routers/products.route');
 const authRoute =  require('./routers/auth.route');
 const cookieParser = require('cookie-parser');
 const authMiddleware =  require('./middlewares/auth.middleware');
@@ -41,5 +42,6 @@ app.listen(port ,function(){
 })
 
 app.use('/users', authMiddleware.requiredAuth, userRoute);
+app.use('/products', authMiddleware.requiredAuth, productRoute);
 
 app.use('/auth', authRoute);
